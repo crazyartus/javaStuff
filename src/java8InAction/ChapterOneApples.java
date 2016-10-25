@@ -49,6 +49,8 @@ public class ChapterOneApples {
         List<Apple> greenApplesList = filterApples(inventory, (Apple apple) -> "green".equals(apple.getColor()));
         greenApplesList.forEach(System.out::println);
 
+        // wychodzimy poza jabluszka
+//        List<Orange> orangesList
     }
 
     public static List<Apple> filtrujZieloneJabluszka(List<Apple> inventory){
@@ -88,6 +90,19 @@ public class ChapterOneApples {
         for(Apple apple : inventory){
             if(p.Test(apple)){ // czyli jesli dwa testy zostaja spelnione  = zielony i wazy > 110
                 result.add(apple);
+            }
+        }
+
+        return result;
+    }
+
+    //wychodzimy poza jabluszka
+    public static <T> List<T> filter(List<T> list, Predicate<T> p){
+        List<T> result = new ArrayList<>();
+
+        for (T e : list){
+            if(p.test(e)){
+                result.add(e);
             }
         }
 
