@@ -1,3 +1,4 @@
+package someFreeCode;
 
 public class checkClass {
     public static void main(String[] args){

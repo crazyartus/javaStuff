@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$//JavaOne.iml" filepath="$PROJECT_DIR$//JavaOne.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaOne.iml" filepath="$PROJECT_DIR$/JavaOne.iml" />
     </modules>
   </component>
 </project>
