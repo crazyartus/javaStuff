@@ -1,0 +1,40 @@
+package OperacjeNaStringach;
+
+import org.junit.Test;
+
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+
+public class TestoperacjaDrugaNaStringach {
+
+    @Test
+    public void checkMethodWrongSQLCapitalLetters(){
+        operacjaDrugaNaStringach objekt = new operacjaDrugaNaStringach();
+        String sqlSample = "DROP TABLE THF221";
+        assertTrue(objekt.checkSQL(sqlSample));
+    }
+
+    @Test
+    public void checkMethodWrongSQLlowerLetters(){
+        operacjaDrugaNaStringach objekt = new operacjaDrugaNaStringach();
+        String sqlSample = "insert into thf221 set a value c";
+        assertTrue(objekt.checkSQL(sqlSample));
+    }
+
+    @Test
+    public void checkMethodGoodSQLlowerLetters(){
+        operacjaDrugaNaStringach objekt = new operacjaDrugaNaStringach();
+        String sqlSample = "select * from thf221";
+        assertFalse(objekt.checkSQL(sqlSample));
+    }
+
+    @Test
+    public void checkMethodGoodSQLCapitalLetters(){
+        operacjaDrugaNaStringach objekt = new operacjaDrugaNaStringach();
+        String sqlSample = "SELECT * FROM THF221";
+        assertFalse(objekt.checkSQL(sqlSample));
+    }
+
+}
