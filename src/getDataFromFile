@@ -1,0 +1,41 @@
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Iterator;
+
+public class ConfigFile implements ConfigurationFileInterface{
+    private final String pathToIniFile = System.getProperty("user.home")+ "/Desktop/";
+    private final String configurationFile = "cfg.ini";
+    private HashMap<Integer, String> fileContent = new HashMap<>();
+    private String line;
+    private int counter = 0;
+
+    //konstruktor ktory od razu pobiera zawartosc pliku i wrzuca do hash mapy
+    public ConfigFile(){
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(pathToIniFile + configurationFile));
+            while ((line = reader.readLine()) != null) {
+                fileContent.put(counter, line);
+                counter++;
+            }
+        }catch(IOException error){
+            System.out.print("there is an error with opening configuration file" + error.getMessage());
+        }
+    }
+
+    //pobranie id uzytkownika
+    @Override
+    public String takeUserID() {
+        String userIDFromFile =fileContent.get(2);
+        return userIDFromFile;
+    }
+
+    //pobranie domyslnej sciezki do zapisu plikow
+    @Override
+    public String takePathToSaveExcelFile() {
+        String path = fileContent.get(1);
+        return path;
+    }
+}
