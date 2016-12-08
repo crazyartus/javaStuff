@@ -1,0 +1,33 @@
+package OperacjeNaStringach;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class operacjaPierwsza {
+    public static void main(String[] parm){
+        List<String> sqlStatements = new ArrayList<>();
+        sqlStatements.add("SELECT * FROM THF221");
+        sqlStatements.add("update * FROM THF221");
+        sqlStatements.add("ALTER * FROM THF221");
+        sqlStatements.add("insert * FROM THF221");
+        sqlStatements.add("DROP * FROM THF221");
+        sqlStatements.add("delete * FROM THF221");
+
+        List<String> sensitiveWords = new ArrayList<>();
+            sensitiveWords.add("UPDATE");
+            sensitiveWords.add("ALTER");
+            sensitiveWords.add("INSERT");
+            sensitiveWords.add("DROP");
+            sensitiveWords.add("DELETE");
+
+        // sprawdzamie stringa dla kilku slow
+
+        sqlStatements.forEach((n) -> {
+            sensitiveWords.forEach( (k) -> {
+                    if (n.toLowerCase().startsWith(k.toLowerCase())){
+                     System.out.println("znalazlem zakazane slowo ! -> " + k +" ,w zapytaniu " + n);
+                 }
+            });
+        });
+    }
+}
