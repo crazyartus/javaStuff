@@ -1,0 +1,24 @@
+package OperacjeNaStringach;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class operacjaDrugaNaStringach {
+
+    public boolean checkSQL(String sql){
+        boolean trueOrFalse = false;
+        List<String> sensitiveWords = new ArrayList<>();
+        sensitiveWords.add("update");
+        sensitiveWords.add("alter");
+        sensitiveWords.add("insert");
+        sensitiveWords.add("drop");
+        sensitiveWords.add("delete");
+
+        for (String word : sensitiveWords){
+            if(sql.toLowerCase().startsWith(word))
+            trueOrFalse = true;
+        }
+        return trueOrFalse;
+    }
+
+}
