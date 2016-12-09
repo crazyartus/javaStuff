@@ -1,0 +1,45 @@
+public void saveExcelFileTo() throws IOException {
+        setting.put("pathToSave", main.getPathToSave());
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files - xlsx", "xlsx");
+        fileChooser.setFileFilter(filter);
+        int answer = fileChooser.showSaveDialog(new JFrame());
+        // jesli nie mamy pliku konfiguracyjnego, standardowe zapisywanie,
+
+        if (main.getUserIdFromFile() == null) {
+            if (answer == JFileChooser.APPROVE_OPTION) {
+                file = fileChooser.getSelectedFile();
+                if ((file.exists())) {
+                    int reply = JOptionPane.showConfirmDialog(new JFrame(), "You're going to override existing file", "SQL - Option: Just Run.", JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        //skasowanie rozszerzenia zaznaczonego pliku.
+                        String fileName = file.getName().replaceFirst("[.][^.]+$", "");
+                        //wstawienie rozszerzenia xlsx - czyli nowego.
+                        file = new File(String.valueOf(fileName + ".xlsx"));
+                        //wlasciwe zapisanie pliku.
+                    } else if (reply == JOptionPane.NO_OPTION) {
+                        saveExcelFileTo();
+                        return;
+                    }
+                }
+                // plik nie istnieje = tworzymy nowy
+                else {
+                    file = new File(String.valueOf(file + ".xlsx"));
+                }
+                FileOutputStream saveExcelFile = new FileOutputStream(file);
+                ExcelFile.write(saveExcelFile);
+                saveExcelFile.flush();
+                saveExcelFile.close();
+            } else if (answer == JFileChooser.CANCEL_OPTION) {
+                JOptionPane.showMessageDialog(new JFrame(), "Output file not saved", "SQL - Option: Just Run.", JOptionPane.INFORMATION_MESSAGE);
+                main.addInformationToOutputField(" -File not saved.\n");
+            }
+        }else {
+            file = new File(String.valueOf(main.getUserIdFromFile() + ".xlsx"));
+            FileOutputStream saveExcelFile = new FileOutputStream(file);
+            ExcelFile.write(saveExcelFile);
+            saveExcelFile.flush();
+            saveExcelFile.close();
+
+        }
+    }
